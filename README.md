@@ -85,7 +85,7 @@ flag (`-Apply` in PowerShell, `--apply` in Bash) to actually act. None
 reference real hostnames, domains, or credentials — placeholders like
 `contoso.local` and `svc-helpdesk` are used throughout.
 
-**PowerShell** (verified for balanced syntax — see *Verification* below):
+**PowerShell** (parser-verified with `pwsh` — see *Verification* below):
 [bulk AD user creation from CSV](scripts/powershell/bulk-ad-user-creation.ps1) ·
 [stale-account audit](scripts/powershell/stale-account-audit.ps1) ·
 [O365 mailbox size report](scripts/powershell/o365-mailbox-size-report.ps1) ·
@@ -116,12 +116,14 @@ would actually use: [VPN connection drops](knowledge-base/vpn-connection-drops.m
   check) and was exercised end-to-end — dry-run mode for all, and real
   (`--apply`) mode for the non-destructive backup script — against a
   scratch test directory during development.
-- **PowerShell**: `pwsh` was not available in the environment these
-  scripts were authored in, so they were not run through the PowerShell
-  parser. Each was manually reviewed for correctness, and every script's
-  brace/paren/bracket counts were checked for balance as a structural
-  sanity check. Review before running against a real AD/M365 environment,
-  as you should with any script pulled from a portfolio repo.
+- **PowerShell**: every script in `scripts/powershell/` was run through
+  PowerShell 7.6.5's own AST parser
+  (`[System.Management.Automation.Language.Parser]::ParseFile`) —
+  0 parse errors across all 5 scripts. That confirms valid syntax, not
+  runtime behavior against a real AD/Exchange Online tenant (these
+  scripts weren't executed against real infrastructure). Review before
+  running against a real environment, as you should with any script
+  pulled from a portfolio repo.
 
 ## License
 

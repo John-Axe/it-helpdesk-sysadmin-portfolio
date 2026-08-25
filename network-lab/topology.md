@@ -4,6 +4,11 @@
 > the ticket scenarios and runbooks in this repo. It is not a production
 > network and does not represent any real employer's infrastructure. IP
 > ranges below are private RFC 1918 space chosen arbitrarily for the lab.
+>
+> For the step-by-step build instructions to actually stand this lab up
+> (VM specs, hypervisor network config, OS install steps), see
+> [`homelab/build-guide.md`](../homelab/build-guide.md). This document
+> covers the logical design; that one covers the exact clicks/commands.
 
 ## Purpose
 
